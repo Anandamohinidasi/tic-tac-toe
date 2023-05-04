@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 
-import './App.css';
 import BoardCell from './components/BoardCell/BoardCell';
 import WinningBanner from './components/WinningBanner/WinningBanner';
 
@@ -8,6 +7,8 @@ import Board from "./entities/Board";
 
 import getWinner from './helpers/getWinner';
 import switchPlayers from "./helpers/switchPlayers";
+
+import './App.css';
 
 function App() {
   const [currentPlayer, setCurrentPlayer] = useState("X");
@@ -33,7 +34,11 @@ function App() {
         <tbody>
           {board.matrix.map((line,x) => {
             return <tr key={x}>
-              {line.map((cell, y) => <BoardCell key={`${x},${y}`} onClick={() => cellClick(x,y)} value={cell.value} />)}
+              {line.map((cell, y) => <BoardCell 
+                                        key={`${x},${y}`} 
+                                        onClick={() => cellClick(x,y)} 
+                                        value={cell.value} 
+                                    />)}
             </tr>
           })}
         </tbody>

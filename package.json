@@ -1,5 +1,7 @@
 {
   "name": "tic-tac-toe",
+  "author": "Ananda Rodrigues (ananda.mohini.dasi@hotmail.com)",
+  "description": "Simple tic tac toe using react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
