@@ -1,0 +1,13 @@
+.cell {
+    width: 100px;
+    height: 100px;
+    margin: 15px;
+    text-align: center;
+    color: white;
+    font-size: 50px;
+    cursor: pointer;
+  }
+  
+  .cell:not(:last-of-type) {
+    border-right: 5px solid #FFFFFF;
+  }

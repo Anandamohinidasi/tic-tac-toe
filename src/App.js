@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import {useEffect, useState} from 'react';
+
 import './App.css';
+import BoardCell from './components/BoardCell/BoardCell';
+import WinningBanner from './components/WinningBanner/WinningBanner';
+
+import Board from "./entities/Board";
+
+import getWinner from './helpers/getWinner';
+import switchPlayers from "./helpers/switchPlayers";
 
 function App() {
+  const [currentPlayer, setCurrentPlayer] = useState("X");
+  const [winner, setWinner] = useState(false);
+  const length = 5;
+  const board = new Board(length);
+
+  useEffect(() => {
+    const winnerResult = getWinner(board.matrix);
+    if(winnerResult) setWinner(winnerResult); 
+  }, [currentPlayer]);
+
+  function cellClick(x,y) {
+    board.play(currentPlayer, [x,y]);
+    
+    setCurrentPlayer(switchPlayers(currentPlayer));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {winner && <WinningBanner winner={winner} />}
+      <table>
+        <tbody>
+          {board.matrix.map((line,x) => {
+            return <tr key={x}>
+              {line.map((cell, y) => <BoardCell key={`${x},${y}`} onClick={() => cellClick(x,y)} value={cell.value} />)}
+            </tr>
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
